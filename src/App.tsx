@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
 import { GlobalStyle, theme } from "styles";
-import { Main } from "pages";
+import { Main, Menu } from "pages";
 
 function App() {
   return (
@@ -11,6 +11,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/:id" element={<Menu />} />
         </Routes>
       </Router>
     </ThemeProvider>

@@ -5,7 +5,7 @@ export const Divider = () => {
 };
 
 const Line = styled.div`
-  width: 95%;
+  width: 100%;
   height: 1px;
   margin: 0.25rem 0;
   background-color: #dcdce1;

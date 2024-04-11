@@ -41,6 +41,7 @@ const ListWrapper = styled.div`
   img {
     width: 5.75rem;
     height: 5.75rem;
+    border-radius: 0.35rem;
   }
 `;
 
