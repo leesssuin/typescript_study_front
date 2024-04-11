@@ -39,7 +39,7 @@ export default function Main() {
               review={store.review}
               tip={store.tip}
             />
-            {idx < stores.length && <Divider />}
+            {idx < stores.length - 1 && <Divider />}
           </>
         ))}
       </ListContainer>
@@ -54,4 +54,5 @@ const ListContainer = styled.section`
   justify-content: center;
   gap: 1rem;
   margin: 2rem auto;
+  padding: 0 1rem;
 `;

@@ -23,11 +23,18 @@ const HeaderWrapper = styled.header`
   display: flex;
   align-items: center;
   padding: 1rem 1rem 0.5rem 1rem;
-  font-size: ${({ theme }) => theme.fontSize.lg};
+  font-size: ${({ theme }) => theme.fontSize.base};
   font-weight: 700;
 
   .image-wrapper {
+    width: 1.25rem;
+    height: 1.25rem;
     margin-right: 10px;
+
+    img {
+      width: 100%;
+      height: 100%:
+    }
 
     &:hover {
       cursor: pointer;
