@@ -4,9 +4,9 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import axios from "axios";
 
+import { BottomSheet, Divider, Header, Layout } from "components";
 import { SelectedOptionsState } from "stores/options";
 import { Menu, Option, OptionsCategory } from "types";
-import { BottomSheet, Divider, Header, Layout } from "components";
 import { SelectedItem } from "./selectedItem";
 import { Checkbox } from "./checkbox";
 import { StoreApi } from "api";

@@ -26,9 +26,6 @@ export const BottomSheet = ({
 };
 
 const Wrapper = styled.div`
-  /* position: sticky; */
-  /* bottom: 0; */
-  /* left: 0; */
   width: 100%;
   height: auto;
   margin: 0 auto;
