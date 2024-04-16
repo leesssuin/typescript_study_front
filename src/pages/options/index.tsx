@@ -15,11 +15,18 @@ import backImg from "assets/image/back-icon.png";
 export default function Options() {
   const [menuInfo, setMenuInfo] = useState<Menu | undefined>(undefined);
   const [options, setOptions] = useState<OptionsCategory[]>([]);
+  const [selectedCount, setSelectedCount] = useState<number>(0);
   const [selectedOptions, setSelectedOptions] =
     useRecoilState(SelectedOptionsState);
 
   const { id, menuId } = useParams();
   const navigate = useNavigate();
+
+  const totalChoiceCount = options.reduce(
+    (acc, cur) => acc + cur.choice_count,
+    0
+  );
+  const isComplete = selectedCount >= totalChoiceCount ? true : false;
 
   useEffect(() => {
     const getMenuOptions = async () => {
@@ -41,6 +48,15 @@ export default function Options() {
 
     getMenuOptions();
   }, []);
+
+  useEffect(() => {
+    const checkedCount = Object.values(selectedOptions).reduce(
+      (sum, currentArray) => sum + currentArray.length,
+      0
+    );
+
+    setSelectedCount(checkedCount);
+  }, [selectedOptions]);
 
   const HandleCheckChange = (
     options: Option,
@@ -156,6 +172,11 @@ export default function Options() {
             ))}
           </OptionContainer>
         ))}
+      <Wrapper>
+        <Button isComplete={isComplete} selectedCount={selectedCount}>
+          {selectedCount === 0 ? "" : `(${selectedCount}개)`} 선택완료
+        </Button>
+      </Wrapper>
     </Layout>
   );
 }
@@ -212,5 +233,33 @@ const OptionContainer = styled.div`
       text-align: center;
       line-height: 2.5rem;
     }
+  }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #ffffff;
+`;
+
+const Button = styled.button<{ isComplete: boolean; selectedCount: number }>`
+  width: 96%;
+  height: 3rem;
+  margin: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  background-color: ${(props) =>
+    props.isComplete && props.selectedCount !== 0 ? "#0077c2" : "#efeff4"};
+  color: ${(props) => (props.isComplete ? "#ffffff" : "#a3a9ad")};
+  font-size: ${({ theme }) => theme.fontSize.md};
+
+  &:hover {
+    cursor: pointer;
   }
 `;

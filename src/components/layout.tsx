@@ -10,6 +10,9 @@ export const Layout = ({ children }: LayoutProps) => {
 };
 
 const MainLayout = styled.main`
+  position: relative;
+  background-color: ${({ theme }) => theme.color.white};
+
   @media (min-width: 481px) {
     position: relative;
     max-width: 360px;
