@@ -18,6 +18,7 @@ export default function Options() {
   const [options, setOptions] = useState<OptionsCategory[]>([]);
   const [selectedCount, setSelectedCount] = useState<number>(0);
   const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
+  const [isFirstOpen, setIsFirstOpen] = useState<boolean>(false);
   const categoryRef = useRef<{ [key: string]: HTMLElement | null }>({});
   const [selectedOptions, setSelectedOptions] =
     useRecoilState(SelectedOptionsState);
@@ -57,6 +58,11 @@ export default function Options() {
       (sum, currentArray) => sum + currentArray.length,
       0
     );
+
+    if (checkedCount === 1 && !isSheetOpen && !isFirstOpen) {
+      setIsSheetOpen(true);
+      setIsFirstOpen(true);
+    }
 
     setSelectedCount(checkedCount);
   }, [selectedOptions]);
