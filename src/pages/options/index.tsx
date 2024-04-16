@@ -6,7 +6,8 @@ import axios from "axios";
 
 import { SelectedOptionsState } from "stores/options";
 import { Menu, Option, OptionsCategory } from "types";
-import { Divider, Header, Layout } from "components";
+import { BottomSheet, Divider, Header, Layout } from "components";
+import { SelectedItem } from "./selectedItem";
 import { Checkbox } from "./checkbox";
 import { StoreApi } from "api";
 
@@ -16,6 +17,7 @@ export default function Options() {
   const [menuInfo, setMenuInfo] = useState<Menu | undefined>(undefined);
   const [options, setOptions] = useState<OptionsCategory[]>([]);
   const [selectedCount, setSelectedCount] = useState<number>(0);
+  const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
   const [selectedOptions, setSelectedOptions] =
     useRecoilState(SelectedOptionsState);
 
@@ -173,6 +175,9 @@ export default function Options() {
           </OptionContainer>
         ))}
       <Wrapper>
+        <BottomSheet isOpen={isSheetOpen} onClick={setIsSheetOpen}>
+          <SelectedItem items={options} />
+        </BottomSheet>
         <Button isComplete={isComplete} selectedCount={selectedCount}>
           {selectedCount === 0 ? "" : `(${selectedCount}개)`} 선택완료
         </Button>
