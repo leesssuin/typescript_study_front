@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
@@ -18,6 +18,7 @@ export default function Options() {
   const [options, setOptions] = useState<OptionsCategory[]>([]);
   const [selectedCount, setSelectedCount] = useState<number>(0);
   const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
+  const categoryRef = useRef<{ [key: string]: HTMLElement | null }>({});
   const [selectedOptions, setSelectedOptions] =
     useRecoilState(SelectedOptionsState);
 
@@ -143,7 +144,14 @@ export default function Options() {
       {options &&
         options.map((option, idx) => (
           <OptionContainer key={idx}>
-            <div className="category-name">
+            <div
+              className="category-name"
+              ref={(element) => {
+                if (categoryRef) {
+                  categoryRef.current[option.category_name] = element;
+                }
+              }}
+            >
               <p>
                 {option.category_name}
                 {option.choice_count === 0
@@ -176,7 +184,7 @@ export default function Options() {
         ))}
       <Wrapper>
         <BottomSheet isOpen={isSheetOpen} onClick={setIsSheetOpen}>
-          <SelectedItem items={options} />
+          <SelectedItem items={options} categoryRef={categoryRef} />
         </BottomSheet>
         <Button isComplete={isComplete} selectedCount={selectedCount}>
           {selectedCount === 0 ? "" : `(${selectedCount}개)`} 선택완료

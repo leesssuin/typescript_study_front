@@ -3,13 +3,21 @@ import styled from "styled-components";
 
 import { SelectedOptionsState } from "stores/options";
 import { OptionsCategory } from "types";
+import { onScrollTab } from "utils";
 
 interface SelectedItemProps {
   items: OptionsCategory[];
+  categoryRef: React.RefObject<{ [key: string]: HTMLElement | null }>;
 }
 
-export const SelectedItem = ({ items }: SelectedItemProps) => {
+export const SelectedItem = ({ items, categoryRef }: SelectedItemProps) => {
   const selectedOptions = useRecoilValue(SelectedOptionsState);
+
+  const onClickTab = (categoryName: string) => {
+    if (categoryRef.current) {
+      onScrollTab(categoryRef.current[categoryName]);
+    }
+  };
 
   const renderItems = (item: OptionsCategory) => {
     const selectedItems = selectedOptions[item.category_name] || [];
@@ -52,7 +60,9 @@ export const SelectedItem = ({ items }: SelectedItemProps) => {
       {items.map((item, idx) => (
         <GroupWrapper key={idx}>
           <div>
-            <p className="title">{item.category_name}</p>
+            <p className="title" onClick={() => onClickTab(item.category_name)}>
+              {item.category_name}
+            </p>
           </div>
           <BoxWrapper>{renderItems(item)}</BoxWrapper>
         </GroupWrapper>
