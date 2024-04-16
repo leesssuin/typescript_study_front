@@ -1,6 +1,10 @@
 import axios from "./config/axiosInstance";
 
-import { getMenuListResponse, getStoreListResponse } from "types";
+import {
+  getMenuInfoResponse,
+  getMenuListResponse,
+  getStoreListResponse
+} from "types";
 
 const getStoreList = async <T = getStoreListResponse>() => {
   const response = await axios.get<T>("/");
@@ -16,4 +20,13 @@ const getStoreInfo = async <T = getMenuListResponse>(
   return response.data;
 };
 
-export const StoreApi = { getStoreList, getStoreInfo };
+const getOptions = async <T = getMenuInfoResponse>(
+  id: string | undefined,
+  menuId: string | undefined
+) => {
+  const response = await axios.get<T>(`/${id}/${menuId}`);
+
+  return response.data;
+};
+
+export const StoreApi = { getStoreList, getStoreInfo, getOptions };
