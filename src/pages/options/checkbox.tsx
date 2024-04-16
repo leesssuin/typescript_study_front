@@ -38,7 +38,7 @@ export const Checkbox = ({
       </Wrapper>
       <div>
         <Price color={isChecked && !isDisabled ? "#286be4" : "#707376"}>
-          +{price}원
+          +{price.toLocaleString()}원
         </Price>
         <p className="description">{description}</p>
         {isDisabled && (
