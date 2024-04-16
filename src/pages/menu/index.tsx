@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
 import { Divider, Header, Layout } from "components";
 import { StoreInfo } from "types";
 import { StoreApi } from "api";
-import axios from "axios";
 
 import backImg from "assets/image/back-icon.png";
 
@@ -33,6 +33,10 @@ export default function Menu() {
     getInfo();
   }, [id]);
 
+  const handleMenuClick = (menuId: string) => {
+    navigate(`/${id}/${menuId}`);
+  };
+
   return (
     <Layout>
       <Header
@@ -58,7 +62,7 @@ export default function Menu() {
         <p className="title">인기메뉴</p>
         {store?.menu.map((item, idx) => (
           <>
-            <MenuItem key={idx}>
+            <MenuItem key={idx} onClick={() => handleMenuClick(item._id)}>
               <div>
                 <p className="name">{item.name}</p>
                 <p className="description">{item.description}</p>
