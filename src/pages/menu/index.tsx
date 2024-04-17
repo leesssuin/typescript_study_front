@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import axios from "axios";
 
+import { SelectedOptionsState } from "stores/options";
 import { Divider, Header, Layout } from "components";
 import { StoreInfo } from "types";
 import { StoreApi } from "api";
@@ -11,11 +13,14 @@ import backImg from "assets/image/back-icon.png";
 
 export default function Menu() {
   const [store, setStore] = useState<StoreInfo | undefined>(undefined);
+  const setSelectedOptions = useSetRecoilState(SelectedOptionsState);
 
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
+    setSelectedOptions({});
+
     const getInfo = async () => {
       try {
         const storeInfo = await StoreApi.getStoreInfo(id);
@@ -142,5 +147,9 @@ const MenuItem = styled.div`
       width: 100%;
       border-radius: 0.35rem;
     }
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 `;
