@@ -148,4 +148,8 @@ const MenuItem = styled.div`
       border-radius: 0.35rem;
     }
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
