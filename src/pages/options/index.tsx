@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import axios from "axios";
 
-import { BottomSheet, Divider, Header, Layout } from "components";
+import { BottomSheet, Divider, Header, Layout, Toast } from "components";
 import { SelectedOptionsState } from "stores/options";
 import { Menu, Option, OptionsCategory } from "types";
 import { SelectedItem } from "./selectedItem";
@@ -19,6 +19,7 @@ export default function Options() {
   const [selectedCount, setSelectedCount] = useState<number>(0);
   const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
   const [isFirstOpen, setIsFirstOpen] = useState<boolean>(false);
+  const [isToastOpen, setIsToastOpen] = useState<boolean>(false);
   const categoryRef = useRef<{ [key: string]: HTMLElement | null }>({});
   const [selectedOptions, setSelectedOptions] =
     useRecoilState(SelectedOptionsState);
@@ -109,13 +110,27 @@ export default function Options() {
             name: name,
             category: category,
             price: price,
-            isChecked: true
+            isChecked: true,
+            isRequired: choiceCount > 0 ? true : false
           }
         ];
       }
 
       return updatedSelectedItem;
     });
+  };
+
+  const handleCompleteButtonClick = () => {
+    const requiredCheckCount = Object.values(selectedOptions).reduce(
+      (total, items) => {
+        return total + items.filter((item) => item.isRequired).length;
+      },
+      0
+    );
+
+    if (requiredCheckCount < totalChoiceCount) {
+      setIsToastOpen(true);
+    }
   };
 
   const isChecked = (currentId: string) => {
@@ -192,9 +207,16 @@ export default function Options() {
         <BottomSheet isOpen={isSheetOpen} onClick={setIsSheetOpen}>
           <SelectedItem items={options} categoryRef={categoryRef} />
         </BottomSheet>
-        <Button isComplete={isComplete} selectedCount={selectedCount}>
+        <Button
+          isComplete={isComplete}
+          selectedCount={selectedCount}
+          onClick={handleCompleteButtonClick}
+        >
           {selectedCount === 0 ? "" : `(${selectedCount}개)`} 선택완료
         </Button>
+        {isToastOpen && (
+          <Toast message="필수선택을 확인해주세요 😊" onOpen={setIsToastOpen} />
+        )}
       </Wrapper>
     </Layout>
   );

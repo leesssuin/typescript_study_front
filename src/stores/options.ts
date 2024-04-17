@@ -7,6 +7,7 @@ interface SelectedOptions {
     category: string;
     price: number;
     isChecked: boolean;
+    isRequired: boolean;
   }[];
 }
 
