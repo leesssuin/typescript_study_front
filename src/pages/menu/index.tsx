@@ -4,7 +4,7 @@ import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import axios from "axios";
 
-import { SelectedOptionsState } from "stores/options";
+import { SelectedOptionsState } from "stores";
 import { Divider, Header, Layout } from "components";
 import { StoreInfo } from "types";
 import { StoreApi } from "api";
