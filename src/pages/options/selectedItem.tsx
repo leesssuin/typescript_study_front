@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
-import { SelectedOptionsState } from "stores/options";
+import { SelectedOptionsState } from "stores";
 import { OptionsCategory } from "types";
 import { onScrollTab } from "utils";
 
