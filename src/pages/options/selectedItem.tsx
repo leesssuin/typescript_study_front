@@ -59,8 +59,8 @@ export const SelectedItem = ({ items, categoryRef }: SelectedItemProps) => {
     <ContentContainer>
       {items.map((item, idx) => (
         <GroupWrapper key={idx}>
-          <div>
-            <p className="title" onClick={() => onClickTab(item.category_name)}>
+          <div className="title">
+            <p onClick={() => onClickTab(item.category_name)}>
               {item.category_name}
             </p>
           </div>
@@ -82,10 +82,8 @@ const GroupWrapper = styled.div`
   padding: 0.24rem 0;
 
   .title {
-    width: 2.5rem;
-    margin-right: 2.5rem;
+    width: 30%;
     font-size: ${({ theme }) => theme.fontSize.md};
-    white-space: nowrap;
 
     &:hover {
       cursor: pointer;
@@ -97,6 +95,7 @@ const BoxWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
+  width: 70%;
 `;
 
 const EmptyBox = styled.div<{ isAdditionalOption: boolean }>`
