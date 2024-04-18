@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import { useResetRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import axios from "axios";
 
-import { SelectedOptionsState } from "stores";
+import { SelectedMenuState, SelectedOptionsState } from "stores";
 import { Divider, Header, Layout } from "components";
 import { StoreInfo } from "types";
 import { StoreApi } from "api";
@@ -13,13 +13,16 @@ import backImg from "assets/image/back-icon.png";
 
 export default function Menu() {
   const [store, setStore] = useState<StoreInfo | undefined>(undefined);
-  const setSelectedOptions = useSetRecoilState(SelectedOptionsState);
+  const setSelectedMenu = useSetRecoilState(SelectedMenuState);
+  const resetSelectedOptions = useResetRecoilState(SelectedOptionsState);
+  const resetSelectedMenu = useResetRecoilState(SelectedMenuState);
 
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    setSelectedOptions({});
+    resetSelectedOptions();
+    resetSelectedMenu();
 
     const getInfo = async () => {
       try {
@@ -38,7 +41,21 @@ export default function Menu() {
     getInfo();
   }, [id]);
 
-  const handleMenuClick = (menuId: string) => {
+  const handleMenuClick = (
+    menuId: string,
+    name: string,
+    price: number,
+    tip: number,
+    image: string
+  ) => {
+    setSelectedMenu((prevState) => ({
+      ...prevState,
+      name: name,
+      basePrice: price,
+      tip: tip,
+      image: image
+    }));
+
     navigate(`/${id}/${menuId}`);
   };
 
@@ -67,7 +84,18 @@ export default function Menu() {
         <p className="title">인기메뉴</p>
         {store?.menu.map((item, idx) => (
           <>
-            <MenuItem key={idx} onClick={() => handleMenuClick(item._id)}>
+            <MenuItem
+              key={idx}
+              onClick={() =>
+                handleMenuClick(
+                  item._id,
+                  item.name,
+                  item.price,
+                  store.tip,
+                  item.image
+                )
+              }
+            >
               <div>
                 <p className="name">{item.name}</p>
                 <p className="description">{item.description}</p>
