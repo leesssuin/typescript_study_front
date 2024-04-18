@@ -20,9 +20,10 @@ export default function Options() {
   const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
   const [isFirstOpen, setIsFirstOpen] = useState<boolean>(false);
   const [isToastOpen, setIsToastOpen] = useState<boolean>(false);
-  const categoryRef = useRef<{ [key: string]: HTMLElement | null }>({});
   const [selectedOptions, setSelectedOptions] =
     useRecoilState(SelectedOptionsState);
+
+  const categoryRef = useRef<{ [key: string]: HTMLElement | null }>({});
 
   const { id, menuId } = useParams();
   const navigate = useNavigate();

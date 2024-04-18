@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Divider, Header, Layout } from "components";
-import { StoreApi } from "api/store";
 import { StoreInfo } from "types";
+import { StoreApi } from "api";
 import { List } from "./list";
 
 export default function Main() {
