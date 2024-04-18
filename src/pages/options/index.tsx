@@ -5,8 +5,8 @@ import styled from "styled-components";
 import axios from "axios";
 
 import { BottomSheet, Divider, Header, Layout, Toast } from "components";
-import { SelectedOptionsState } from "stores/options";
 import { Menu, Option, OptionsCategory } from "types";
+import { SelectedOptionsState } from "stores";
 import { SelectedItem } from "./selectedItem";
 import { Checkbox } from "./checkbox";
 import { StoreApi } from "api";
@@ -130,6 +130,8 @@ export default function Options() {
 
     if (requiredCheckCount < totalChoiceCount) {
       setIsToastOpen(true);
+    } else {
+      navigate(`/${id}/${menuId}/result`);
     }
   };
 
