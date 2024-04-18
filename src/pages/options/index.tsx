@@ -8,6 +8,7 @@ import { BottomSheet, Divider, Header, Layout, Toast } from "components";
 import { Menu, Option, OptionsCategory } from "types";
 import { SelectedOptionsState } from "stores";
 import { SelectedItem } from "./selectedItem";
+import { RESULT_MESSAGE } from "const";
 import { Checkbox } from "./checkbox";
 import { StoreApi } from "api";
 
@@ -39,7 +40,7 @@ export default function Options() {
       try {
         const menuData = await StoreApi.getOptions(id, menuId);
 
-        if (menuData.result === "success") {
+        if (menuData.result === RESULT_MESSAGE.SUCCESS) {
           setMenuInfo(menuData.menu_options);
           setOptions(menuData.menu_options.order_options);
         }

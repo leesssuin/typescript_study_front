@@ -6,6 +6,7 @@ import axios from "axios";
 
 import { SelectedMenuState, SelectedOptionsState } from "stores";
 import { Divider, Header, Layout } from "components";
+import { ERROR_TYPE } from "const";
 import { StoreInfo } from "types";
 import { StoreApi } from "api";
 
@@ -31,7 +32,7 @@ export default function Menu() {
         setStore(storeInfo.store_info);
       } catch (err) {
         if (axios.isAxiosError(err)) {
-          if (err.response?.data.result === "error400") {
+          if (err.response?.data.result === ERROR_TYPE.INVALID_ERROR) {
             alert("잘못된 주소입니다.");
           }
         }
