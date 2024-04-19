@@ -8,6 +8,7 @@ import { BottomSheet, Divider, Header, Layout, Toast } from "components";
 import { Menu, Option, OptionsCategory } from "types";
 import { SelectedOptionsState } from "stores";
 import { SelectedItem } from "./selectedItem";
+import { ERROR_TYPE, RESULT_MESSAGE } from "const";
 import { Checkbox } from "./checkbox";
 import { StoreApi } from "api";
 
@@ -20,9 +21,10 @@ export default function Options() {
   const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
   const [isFirstOpen, setIsFirstOpen] = useState<boolean>(false);
   const [isToastOpen, setIsToastOpen] = useState<boolean>(false);
-  const categoryRef = useRef<{ [key: string]: HTMLElement | null }>({});
   const [selectedOptions, setSelectedOptions] =
     useRecoilState(SelectedOptionsState);
+
+  const categoryRef = useRef<{ [key: string]: HTMLElement | null }>({});
 
   const { id, menuId } = useParams();
   const navigate = useNavigate();
@@ -38,14 +40,14 @@ export default function Options() {
       try {
         const menuData = await StoreApi.getOptions(id, menuId);
 
-        if (menuData.result === "success") {
+        if (menuData.result === RESULT_MESSAGE.SUCCESS) {
           setMenuInfo(menuData.menu_options);
           setOptions(menuData.menu_options.order_options);
         }
       } catch (err) {
         if (axios.isAxiosError(err)) {
-          if (err.response?.data.result === "error400") {
-            alert("잘못된 주소입니다.");
+          if (err.response?.data.result === ERROR_TYPE.INVALID_ERROR) {
+            navigate("/error");
           }
         }
       }
@@ -287,7 +289,7 @@ const Wrapper = styled.div`
   bottom: 0;
   width: 100%;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.color.white};
 `;
 
 const Button = styled.button<{ isComplete: boolean; selectedCount: number }>`

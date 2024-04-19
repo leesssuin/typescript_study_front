@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Divider, Header, Layout } from "components";
-import { StoreApi } from "api/store";
+import { RESULT_MESSAGE } from "const";
 import { StoreInfo } from "types";
+import { StoreApi } from "api";
 import { List } from "./list";
 
 export default function Main() {
@@ -14,7 +15,7 @@ export default function Main() {
       try {
         const list = await StoreApi.getStoreList();
 
-        if (list.result === "success") {
+        if (list.result === RESULT_MESSAGE.SUCCESS) {
           setStores(list.store_list);
         }
       } catch (err) {
