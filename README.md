@@ -82,7 +82,7 @@ DB=<YOUR_MONGODB_URL>
 
 ### 1. 가게 리스트 및 메뉴 리스트
 
-<img src="https://velog.velcdn.com/images/leesssuin/post/1099898c-8dd8-425a-bd60-231d9b703130/image.gif" style="width: 180px" />
+<img src="https://github.com/leesssuin/typescript_study_front/assets/83581529/64e4a53b-89bd-44cb-b576-25f87483e8d2" style="width: 180px" />
 <br>
 
 - 가게를 클릭하면 해당 가게 메뉴 리스트로 이동
@@ -90,7 +90,7 @@ DB=<YOUR_MONGODB_URL>
 
 ### 2. 옵션 리스트
 
-<img src="https://velog.velcdn.com/images/leesssuin/post/ed984295-50ee-4f04-b081-5dfcf2830c85/image.gif" style="width: 180px" />
+<img src="https://github.com/leesssuin/typescript_study_front/assets/83581529/5c969c18-c46c-4c88-ba6e-5276fa648c65" style="width: 180px" />
 <br>
 
 - 필수 선택 갯수 유효성 검사 기능으로 갯수가 부족할 경우 다음 페이지로 넘어가지 않음<br>
@@ -98,7 +98,7 @@ DB=<YOUR_MONGODB_URL>
 
 ### 3. 바텀 시트
 
-<img src="https://velog.velcdn.com/images/leesssuin/post/4aded344-10fc-49b1-b4d4-f38d3206a08a/image.gif" style="width: 180px" />
+<img src="https://github.com/leesssuin/typescript_study_front/assets/83581529/85504455-4463-4594-bee7-0fef8de04fee" style="width: 180px" />
 <br>
 
 - 옵션 선택시 바텀시트에 추가
@@ -119,7 +119,7 @@ DB=<YOUR_MONGODB_URL>
 ### 5. 최종금액 페이지
 
 
-<img src="https://velog.velcdn.com/images/leesssuin/post/c24ec21b-02f9-4bfd-bcf3-bb3601ba341e/image.gif" style="width: 180px" />
+<img src="https://github.com/leesssuin/typescript_study_front/assets/83581529/8e9309bd-26e1-4fd5-8cae-7c9142d87420" style="width: 180px" />
 <br>
 
 - 완료 버튼 클릭시 총 금액 확인할 수 있는 페이지로 이동
