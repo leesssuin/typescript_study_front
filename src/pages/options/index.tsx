@@ -8,7 +8,7 @@ import { BottomSheet, Divider, Header, Layout, Toast } from "components";
 import { Menu, Option, OptionsCategory } from "types";
 import { SelectedOptionsState } from "stores";
 import { SelectedItem } from "./selectedItem";
-import { RESULT_MESSAGE } from "const";
+import { ERROR_TYPE, RESULT_MESSAGE } from "const";
 import { Checkbox } from "./checkbox";
 import { StoreApi } from "api";
 
@@ -46,8 +46,8 @@ export default function Options() {
         }
       } catch (err) {
         if (axios.isAxiosError(err)) {
-          if (err.response?.data.result === "error400") {
-            alert("잘못된 주소입니다.");
+          if (err.response?.data.result === ERROR_TYPE.INVALID_ERROR) {
+            navigate("/error");
           }
         }
       }
@@ -289,7 +289,7 @@ const Wrapper = styled.div`
   bottom: 0;
   width: 100%;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.color.white};
 `;
 
 const Button = styled.button<{ isComplete: boolean; selectedCount: number }>`

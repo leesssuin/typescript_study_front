@@ -33,7 +33,7 @@ export default function Menu() {
       } catch (err) {
         if (axios.isAxiosError(err)) {
           if (err.response?.data.result === ERROR_TYPE.INVALID_ERROR) {
-            alert("잘못된 주소입니다.");
+            navigate("/error");
           }
         }
       }
