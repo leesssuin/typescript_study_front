@@ -6,7 +6,7 @@ import axios from "axios";
 
 import { SelectedMenuState, SelectedOptionsState } from "stores";
 import { Divider, Header, Layout } from "components";
-import { ERROR_TYPE } from "const";
+import { RESULT_MESSAGE } from "const";
 import { StoreInfo } from "types";
 import { StoreApi } from "api";
 
@@ -32,7 +32,7 @@ export default function Menu() {
         setStore(storeInfo.store_info);
       } catch (err) {
         if (axios.isAxiosError(err)) {
-          if (err.response?.data.result === ERROR_TYPE.INVALID_ERROR) {
+          if (err.response?.data.result === RESULT_MESSAGE.FAIL) {
             navigate("/error");
           }
         }
