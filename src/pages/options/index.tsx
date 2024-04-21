@@ -8,7 +8,7 @@ import { BottomSheet, Divider, Header, Layout, Toast } from "components";
 import { Menu, Option, OptionsCategory } from "types";
 import { SelectedOptionsState } from "stores";
 import { SelectedItem } from "./selectedItem";
-import { ERROR_TYPE, RESULT_MESSAGE } from "const";
+import { RESULT_MESSAGE } from "const";
 import { Checkbox } from "./checkbox";
 import { StoreApi } from "api";
 
@@ -46,7 +46,7 @@ export default function Options() {
         }
       } catch (err) {
         if (axios.isAxiosError(err)) {
-          if (err.response?.data.result === ERROR_TYPE.INVALID_ERROR) {
+          if (err.response?.data.result === RESULT_MESSAGE.FAIL) {
             navigate("/error");
           }
         }

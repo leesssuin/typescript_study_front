@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { Divider, Header, Layout } from "components";
@@ -10,6 +11,8 @@ import { List } from "./list";
 export default function Main() {
   const [stores, setStores] = useState<StoreInfo[]>([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const getList = async () => {
       try {
@@ -19,7 +22,7 @@ export default function Main() {
           setStores(list.store_list);
         }
       } catch (err) {
-        alert("문제가 생겼습니다. 잠시 후 다시 이용바랍니다.");
+        navigate("/error");
       }
     };
 
